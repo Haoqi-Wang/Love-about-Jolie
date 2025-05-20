@@ -1,27 +1,65 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My Study Notes</title>
-  <style>
-    body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2em; }
-    h1 { color: #3366cc; }
-    .note { margin-bottom: 1.5em; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>打字机效果</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .typing-container {
+            font-size: 1.5rem;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid black;
+            padding-right: 5px;
+            width: 0;
+            animation: typing 5s steps(80) 1s 1 normal both, blink 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>📘 My Study Notes</h1>
-  <p>Welcome! Here are some of my recent notes:</p>
+    <div class="typing-container" id="typing"></div>
 
-  <div class="note">
-    <h2>📊 Linear Regression</h2>
-    <p><a href="notes/linear-regression.html">Read more</a></p>
-  </div>
+    <script>
+        const text = `Though I can’t predict if there’s a place for me in your future, I want you to know that right here, right now, I am always here. Whether it’s in the light of day or the quiet of the night, I will be waiting for the moment you need me. Today is 520, a day meant for lovers, but I believe it’s a day that you can celebrate too. Because you, just as you are, are so worthy of love—your kindness, your strength, your very being. You deserve to be cherished, not just today, but every single day.`;
 
-  <div class="note">
-    <h2>🧠 Group Lasso</h2>
-    <p><a href="notes/group-lasso.html">Read more</a></p>
-  </div>
+        let i = 0;
+        const typingElement = document.getElementById('typing');
+
+        function typeWriter() {
+            if (i < text.length) {
+                typingElement.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100); // Adjust typing speed here
+            }
+        }
+
+        window.onload = typeWriter; // Start typing when page loads
+    </script>
 </body>
 </html>
