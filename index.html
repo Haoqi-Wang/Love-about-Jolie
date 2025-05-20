@@ -1,65 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>打字机效果</title>
-    <style>
-        body {
-            font-family: 'Courier New', Courier, monospace;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>打字机效果</title>
+  <style>
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-        .typing-container {
-            font-size: 1.5rem;
-            white-space: nowrap;
-            overflow: hidden;
-            border-right: 2px solid black;
-            padding-right: 5px;
-            width: 0;
-            animation: typing 5s steps(80) 1s 1 normal both, blink 0.75s step-end infinite;
-        }
+    .container {
+      max-width: 800px;
+      padding: 20px;
+      margin: 20px;
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
 
-        @keyframes typing {
-            from {
-                width: 0;
-            }
-            to {
-                width: 100%;
-            }
-        }
+    .typing-text {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      border-right: 2px solid black;
+      white-space: pre-wrap; /* 允许换行并保留换行符 */
+      overflow: hidden;
+      word-break: break-word;
+      animation: blink 0.75s step-end infinite;
+      min-height: 200px; /* 预留高度防止页面抖动 */
+    }
 
-        @keyframes blink {
-            50% {
-                border-color: transparent;
-            }
-        }
-    </style>
+    @keyframes blink {
+      50% {
+        border-color: transparent;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .typing-text {
+        font-size: 1rem;
+      }
+
+      .container {
+        margin: 10px;
+        padding: 15px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="typing-container" id="typing"></div>
+  <div class="container">
+    <div class="typing-text" id="typing"></div>
+  </div>
 
-    <script>
-        const text = `Though I can’t predict if there’s a place for me in your future, I want you to know that right here, right now, I am always here. Whether it’s in the light of day or the quiet of the night, I will be waiting for the moment you need me. Today is 520, a day meant for lovers, but I believe it’s a day that you can celebrate too. Because you, just as you are, are so worthy of love—your kindness, your strength, your very being. You deserve to be cherished, not just today, but every single day.`;
+  <script>
+    const text = `Though I can’t predict if there’s a place for me in your future, I want you to know that right here, right now, I am always here. Whether it’s in the light of day or the quiet of the night, I will be waiting for the moment you need me. Today is 520, a day meant for lovers, but I believe it’s a day that you can celebrate too. Because you, just as you are, are so worthy of love—your kindness, your strength, your very being. You deserve to be cherished, not just today, but every single day.`;
 
-        let i = 0;
-        const typingElement = document.getElementById('typing');
+    let i = 0;
+    const typingElement = document.getElementById('typing');
 
-        function typeWriter() {
-            if (i < text.length) {
-                typingElement.innerHTML += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 100); // Adjust typing speed here
-            }
-        }
+    function typeWriter() {
+      if (i < text.length) {
+        typingElement.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 50); // 字符出现速度（越小越快）
+      }
+    }
 
-        window.onload = typeWriter; // Start typing when page loads
-    </script>
+    window.onload = typeWriter;
+  </script>
 </body>
 </html>
